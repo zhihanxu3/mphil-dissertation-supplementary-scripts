@@ -1,6 +1,16 @@
-# mphil-dissertation-supplementary-scripts
-Supplementary Python scripts and result data for my MPhil in Polar Studies dissertation on supraglacial channel mapping
+# MPhil in Polar Studies Dissertation Supplementary Scripts
+Supplementary Python scripts and result data for my University of Cambridge MPhil in Polar Studies dissertation on supraglacial channel mapping
 
+## Histogram Analysis
+`1D_histogram_analysis.py' and `2D_histogram_analysis.py' produce 1D and 2D spectral histograms respectively for manually annotated training pixels on PlanetScope imagery. The histograms visualise the distribution of reflectance values per class for individual bands (1D) or in two-band spectral space (2D), allowing visual assessment of class separability before classification. Both scripts accept either a raster mask or a vector annotation layer (GeoPackage) as input. These can be training masks for machine learning classifications. The script is designed to runs within the QGIS Python Console but may also be run in external environments independently.
+
+## NDI Threshold Mask Production
+`NDI_threshold_mask_production.py` generates a quick binary raster mask by applying a user-defined threshold to any normalised difference index (NDI) computed from two chosen bands. It is designed for rapid mask generation (e.g. NDWIice, NDWI) as a starting point or baseline method before applying supervised classification approaches. The script is designed to runs within the QGIS Python Console.
+
+## Random Forest Classification Scripts
+`Random_Forest_classification_4_bands.py` and `Random_Forest_classification_8_bands.py` are python scripts for Random Forest classification of supraglacial meltwater features using PlanetScope imagery. Both scripts operate in two modes. Set MODE = 'train' will ask the script to collect and learn training pixels and train the model, after which, setting the MODE = 'apply can load the saved model and run prediction.
+
+Due to extensive feature engineering including multiple spectral indices and local texture statistics, combined with a large training pixel set, this script is computationally demanding. The classifier is configured with n_jobs=-1, which instructs scikit-learn to use all available CPU cores in parallel for both training and prediction; providing more cores therefore directly reduces processing time. The author recommends running this script on an HPC platform or a workstation with at least 32 CPU cores and 128 GB RAM. Under those conditions, training the 8-band model takes approximately 8 hours. Prediction is considerably faster and more dependent on the size of imagery to be predicted. The relevant slurm files (`rf_4_bands.sh` and `rf_8_bands.sh`) that the author has used to run the scripts on the University of Cambridge HPC platform remotely have been provided. 
 
 ## nnU-Net Supraglacial Meltwater Feature Mapping — Workflow Guide
 
@@ -17,7 +27,7 @@ Run 'split_bands_training_imagery.py' on your imagesTr folder. This splits each
 by nnU-Net, and removes the original 8-band files afterwards.
 
 #### Step 2 — Prepare label masks and dataset.json
-Run `prepare_nnunet_training_masks.py`. This remaps your RF annotation
+Run `prepare_training_masks.py`. This remaps your RF annotation
 class IDs to the nnU-Net 3-class label scheme (background, lake,
 channel), resolves any shape mismatches between masks and images,
 saves corrected labels to labelsTr/, and generates dataset.json
@@ -79,7 +89,7 @@ tiles and saves them as band-split files into the Dataset502
 imagesTr folder, ready for nnU-Net directly.
 
 #### Step 2 — Prepare label masks and dataset.json
-Re-run `prepare_nnunet_dataset.py` with paths updated. 
+Re-run `prepare_training_masks.py` with paths updated. 
 The label masks are identical to the 8-band model.
 But output paths need to be changed.
 
@@ -89,7 +99,7 @@ resume, find best, predict) are not separately provided for the
 4-band model here, as they are nearly identical to their 8-band
 counterparts. The changes required are mainly related to updating 
 dataset ID, folder paths to point to Dataset502 directories,
-and 'predict_input/' to contain the 4-band split prediction tiles. 
+and `predict_input/` to contain the 4-band split prediction tiles. 
 
 All other SLURM directives, module loads, environment variables,
 and nnU-Net commands need no change.
