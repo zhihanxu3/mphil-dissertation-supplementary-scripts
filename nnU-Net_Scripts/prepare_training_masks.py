@@ -1,3 +1,40 @@
+# ============================================================
+# nnU-Net training masks preparation — Labels and dataset.json
+# Standalone Python Script
+# Author: Zhihan Xu
+# Date: May 2026
+# ============================================================
+#
+# Description:
+#   Prepares the labelled mask component of the nnU-Net
+#   training dataset (Dataset501_Planet). For each training
+#   tile, this script remaps the original RF annotation class
+#   IDs to the three-class nnU-Net label scheme (background,
+#   lake, channel), handles any pixel-level shape mismatches
+#   between mask and image, and saves the corrected labels to
+#   the nnUNet_raw/labelsTr folder. It also generates the
+#   required dataset.json describing the 8-band channel
+#   configuration and label mapping.
+
+#   Run this script before submitting preprocess.sh 
+#   and after splitting training images into individual band tiles
+#
+# Label remapping (RF annotation → nnU-Net):
+#   1 (Snow / clean ice) → 0  background
+#   3 (Supraglacial lake) → 1  lake
+#   4 (Supraglacial channel) → 2  channel
+#   all others             → 3  ignore
+#
+# Inputs:
+#   - SRC_MASKS : folder of RF annotation mask GeoTIFFs
+#   - IMG_TR    : imagesTr folder already created, with
+#                 band-split training image tiles
+#
+# Outputs:
+#   - labelsTr/*.tif     : remapped label GeoTIFFs
+#   - dataset.json       : nnU-Net dataset descriptor
+# ============================================================
+
 import os, json, re, tifffile
 import numpy as np
 import imageio.v3 as iio
@@ -5,12 +42,15 @@ from pathlib import Path
 import rasterio
 from rasterio.errors import RasterioIOError
 
-# --- SETTINGS ---
-SRC_MASKS = Path("/rds/user/zx335/hpc-work/nnunet_project/nnUNet_masks")
-OUT_ROOT  = Path("/rds/user/zx335/hpc-work/nnunet_project/nnUNet_raw/Dataset501_Planet")
+# ==========================================================
+# USER INPUT
+# ==========================================================
+
+SRC_MASKS = Path("/path/to/your/nnUNet_masks")                      # source RF annotation masks
+OUT_ROOT  = Path("/path/to/your/nnUNet_raw/Dataset501_Planet")      # nnU-Net raw dataset root
 LBL_TR    = OUT_ROOT / "labelsTr"
 
-# Matches: digits + optional letter + underscore + digits (e.g., 2_0006 or 16A_0000)
+# Regex to extract tile ID from filename (e.g. 2_0006 or 16A_0000)
 CASE_RE = re.compile(r"(\d+[A-Z]?_\d+)")
 
 def remap_mask(arr):
