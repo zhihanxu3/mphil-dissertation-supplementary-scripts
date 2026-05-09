@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# nnU-Net Training — Fold 3 — 5-Fold Cross-Validation
+# nnU-Net Training — Fold 3 — 5-Fold Cross-Validation — HPC SLURM Batch Script
 # Author: Zhihan Xu
 # Date: May 2026
 # ============================================================
