@@ -40,11 +40,11 @@ import matplotlib.pyplot as plt
 # USER INPUT
 # ==========================================================
 
-image_path = r"enter image path here"
-mask_raster_path = r"enter mask raster path here"
-vector_mask_path = r"enter mask vector path here"
+image_path = r"C:\path\to\your\input_image.tif"   # PlanetScope GeoTIFF
+mask_raster_path = r"C:\path\to\your\input_raster.tif"   # Mask in raster form
+vector_mask_path = r"C:\path\to\your\input_vector.gpkg"   # Mask in vector geopackage form
 
-output_dir = r"enter oytput folder path here"
+output_dir =r"C:\path\to\your\output_path"   # Output folder path
 os.makedirs(output_dir, exist_ok=True)
 
 tile_id = "10_0004"
