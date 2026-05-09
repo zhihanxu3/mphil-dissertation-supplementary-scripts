@@ -1,3 +1,31 @@
+# ============================================================
+# 2D Spectral Histogram Analysis — QGIS Python Console Script
+# Author: Zhihan Xu
+# Date: May 2026
+# ============================================================
+#
+# Description:
+#   Generates 2D histograms of pixel reflectance values across
+#   two user-selected PlanetScope bands (e.g. Blue vs Red,
+#   Blue vs NIR, Green vs NIR) for manually annotated training
+#   pixels. Each annotation class is sampled and plotted as a
+#   spectral density distribution, allowing visual inspection
+#   of class separability before random forest classification.
+#   Sampling is capped to balance class sizes and avoid
+#   overrepresentation of larger classes.
+#   Must be run inside the QGIS Python Console.
+#
+# Inputs:
+#   - A PlanetScope multispectral raster layer loaded in QGIS
+#   - A vector annotation layer (GeoPackage or similar) with
+#     a field storing integer class labels (e.g. class_id)
+#
+# Outputs:
+#   - An interactive 2D histogram plot (matplotlib) showing
+#     per-class spectral density on a log colour scale
+# ============================================================
+
+
 import numpy as np
 import random
 from osgeo import gdal
@@ -9,10 +37,10 @@ import matplotlib.pyplot as plt
 # -----------------------------
 
 # Raster layer name (as shown in QGIS)
-raster_layer_name = "planet_tile_0001"  # change to my layer name
+raster_layer_name = "planet_tile_0001"  # change to my raster layer name
 
 # Vector mask layer name
-vector_layer_name = "planet_mask_annotations"
+vector_layer_name = "planet_mask_annotations" # change to my vector layer name
 
 # Field storing class labels
 class_field = "class_id"
@@ -20,12 +48,8 @@ class_field = "class_id"
 # PlanetScope band indices (1-based GDAL indexing)
 band_x = 2  # Blue
 band_y = 5  # Red
-# can also try 
-# Blue vs NIR (band 2 vs band 8) or
-# Green vs NIR(band 4 vs band 8)
 
-
-target_samples = 20000
+target_samples = 20000 # number of pixels to randomly select from annotated samples for histogram analysis
 ignore_label = 255
 
 # -----------------------------
