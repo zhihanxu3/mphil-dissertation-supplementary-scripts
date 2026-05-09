@@ -1,8 +1,7 @@
 # ============================================================
-# 1D Spectral Histogram Analysis — Standalone Python Script
-# Dissertation: [Your Dissertation Title Here]
-# Author: [Your Name]
-# Date: [Month Year]
+# 1D Spectral Histogram Analysis
+# Author: Zhihan Xu
+# Date: May 2026
 # ============================================================
 #
 # Description:
@@ -16,7 +15,7 @@
 #   layer (GeoPackage); the vector path rasterises the layer
 #   on the fly into an in-memory class raster so that both
 #   inputs follow exactly the same downstream logic.
-#   Run as a standalone script — does not require QGIS.
+#   Run in QGIS python module.
 #
 # Inputs:
 #   - image_path        : PlanetScope multispectral GeoTIFF
@@ -41,11 +40,11 @@ import matplotlib.pyplot as plt
 # USER INPUT
 # ==========================================================
 
-image_path = r"D:\MPhil_Project_Preparation\PlanetScope_Data\SchemeA_multi_training\Training_Images\planet_tile_10_0004.tif"
-mask_raster_path = r"D:\MPhil_Project_Preparation\PlanetScope_Data\SchemeA_multi_training\Training_Masks\10_0004_mask_raster.tif"
-vector_mask_path = r"D:\MPhil_Project_Preparation\PlanetScope_Data\planet_tile_10_0004\planet_tile_10_0004_mask_gpack.gpkg"
+image_path = r"enter image path here"
+mask_raster_path = r"enter mask raster path here"
+vector_mask_path = r"enter mask vector path here"
 
-output_dir = r"D:\MPhil_Project_Preparation\PlanetScope_Data\Histograms\planet_tile_10"
+output_dir = r"enter oytput folder path here"
 os.makedirs(output_dir, exist_ok=True)
 
 tile_id = "10_0004"
@@ -113,7 +112,7 @@ if use_vector:
     mask_ds.SetProjection(projection)
 
     mask_band = mask_ds.GetRasterBand(1)
-    mask_band.Fill(255)           # fill with nodata before burning
+    mask_band.Fill(255)           # fill with nodata
     mask_band.SetNoDataValue(255)
 
     vector_ds = ogr.Open(vector_mask_path)
