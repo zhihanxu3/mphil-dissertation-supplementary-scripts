@@ -20,8 +20,8 @@
 
 # ------ SLURM job configuration ----------------------------
 #SBATCH --job-name=nnunet_f4
-#SBATCH --account=YOUR_ACCOUNT          # the HPC project account code
-#SBATCH --partition=YOUR_GPU_PARTITION  # e.g. ampere, gpu
+#SBATCH --account=ACCOUNT_CODE          # the HPC project account code
+#SBATCH --partition=GPU_PARTITION  # e.g. ampere, gpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --gres=gpu:1                   # single GPU per fold
