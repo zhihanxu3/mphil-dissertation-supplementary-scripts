@@ -24,7 +24,7 @@ Please refer to Isensee et al. (2021) for detailed description of nnU-Net algori
 ### Part 1 — 8-Band SuperDove Model (Dataset501)
 
 #### Step 1 — Split training image bands
-Run 'split_bands_training_imagery.py' on your imagesTr folder. This splits each
+Run `split_bands_training_imagery.py` on your imagesTr folder. This splits each
 8-band PlanetScope GeoTIFF into eight single-band files named
 `[tile_id]_0000.tif` through `[tile_id]_0007.tif` as required
 by nnU-Net, and removes the original 8-band files afterwards.
@@ -46,10 +46,10 @@ Residual Encoder planner (ResEncL) for the 2D configuration.
 #### Step 4 — Train all five folds
 Submit one job per fold. All five can be submitted at once and
 will run in parallel on the GPU cluster:
-sbatch train_fold_0.sh
-sbatch train_fold_1.sh
-sbatch train_fold_2.sh
-sbatch train_fold_3.sh
+sbatch train_fold_0.sh,
+sbatch train_fold_1.sh,
+sbatch train_fold_2.sh,
+sbatch train_fold_3.sh,
 sbatch train_fold_4.sh
 
 The full model requires all five folds to be complete. If any job 
