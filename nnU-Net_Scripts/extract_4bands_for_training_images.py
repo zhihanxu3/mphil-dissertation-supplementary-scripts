@@ -17,7 +17,7 @@
 #
 # Bands extracted from 8-band SuperDove (1-indexed):
 #   Band 2 = Blue
-#   Band 3 = Green
+#   Band 4 = Green
 #   Band 6 = Red
 #   Band 8 = NIR
 #
@@ -44,14 +44,14 @@ OUTPUT_DIR = "/path/to/your/Dataset502_Planet4band/imagesTr"      # 4-band outpu
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Bands to extract from 8-band SuperDove (1-indexed for rasterio)
-BANDS_TO_EXTRACT = [2, 3, 6, 8]
+BANDS_TO_EXTRACT = [2, 4, 6, 8]
 
 tif_files = sorted(glob.glob(os.path.join(INPUT_DIR, "*.tif")))
 print("Images found: %d" % len(tif_files))
 
 for img_path in tif_files:
     fname = os.path.basename(img_path)
-    case  = os.path.splitext(fname)[0]   # e.g. planet_tile_11B_0000
+    case  = os.path.splitext(fname)[0]  
 
     with rasterio.open(img_path) as src:
         if src.count != 8:
