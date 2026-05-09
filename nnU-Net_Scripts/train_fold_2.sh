@@ -1,11 +1,11 @@
 #!/bin/bash
 # ============================================================
-# nnU-Net Training — Fold 2 of 5 — HPC SLURM Batch Script
+# nnU-Net Training — Fold 2 — 5-Fold Cross-Validation
 # Author: Zhihan Xu
 # Date: May 2026
 # ============================================================
 # Description:
-#   Trains nnU-Net v2 on fold 0 of a 5-fold cross-validation
+#   Trains nnU-Net v2 on fold 2 of a 5-fold cross-validation (folds 0-4)
 #   split for the dataset 501, 2D configuration. Five separate
 #   scripts (train_fold_0.sh to train_fold_4.sh) are provided
 #   because each fold is submitted as an independent GPU job,
@@ -15,7 +15,7 @@
 #   Submit via: sbatch train_fold_2.sh in a terminal
 #
 # Input:  Preprocessed data under nnUNet_preprocessed
-# Output: Trained fold 0 model saved to nnUNet_results
+# Output: Trained fold 2 model saved to nnUNet_results
 # ============================================================
 
 # ------ SLURM job configuration ----------------------------
