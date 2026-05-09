@@ -1,7 +1,39 @@
+# ============================================================
+# nnU-Net Image Band Splitting
+# Author: Zhihan Xu
+# Date: May 2026
+# ============================================================
+#
+# Description:
+#   Splits 8-band PlanetScope GeoTIFFs into individual
+#   single-band files as required by nnU-Net's imagesTr/
+#   imagesPr folder convention, where each channel must be
+#   stored as a separate file suffixed _0000 to _0007.
+#   Already-split single-band files are skipped automatically.
+#   The original 8-band file is deleted after splitting.
+#   Run this before prepare_nnunet_dataset.py and
+#   preprocess.sh.
+#
+# Inputs:
+#   - input_dir : folder containing 8-band PlanetScope
+#                 GeoTIFFs (imagesTr/ or imagesPr/)
+#
+# Outputs:
+#   - Per-band GeoTIFFs in the same folder, named
+#     [tile_id]_0000.tif through [tile_id]_0007.tif
+#   - Original 8-band files removed after splitting
+# ============================================================
+
 import os, glob, rasterio
 from tqdm import tqdm
 
-input_dir = "/rds/user/zx335/hpc-work/nnunet_project/nnUNet_raw/Dataset501_Planet/imagesPr"
+# ==========================================================
+# USER INPUT
+# ==========================================================
+
+# Folder containing 8-band PlanetScope tiles to split
+# (typically imagesTr/ for training or imagesPr/ for prediction)
+input_dir = "/path/to/your/nnUNet_raw/Dataset501_Planet/imagesPr"
 
 def split_multiband_to_nnunet():
     # 1. Grab every .tif in the folder
