@@ -18,8 +18,8 @@
 
 # ------ SLURM job configuration ----------------------------
 #SBATCH --job-name=nnunet_pre
-#SBATCH --account=YOUR_ACCOUNT          # the HPC project account code
-#SBATCH --partition=YOUR_PARTITION      # e.g. icelake, gpu, cpu
+#SBATCH --account=ACCOUNT_CODE         # the HPC project account code
+#SBATCH --partition=PARTITION_TYPE      # e.g. icelake, gpu, cpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16             # preprocessing is CPU-bound; 16 recommended
