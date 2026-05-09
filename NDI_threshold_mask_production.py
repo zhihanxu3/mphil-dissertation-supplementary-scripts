@@ -1,14 +1,13 @@
 # ============================================================
 # NDI Threshold-Based Binary Mask Production
-# QGIS Python Console Script
-# Author: [Your Name]
-# Date: [Month Year]
+# Author: Zhihan Xu
+# Date: May 2026
 # ============================================================
 # Description:
 #   Computes any two-band normalised difference index (NDI)
 #   and produces a single-class binary raster mask by applying
 #   a user-defined threshold. Designed for quick mask
-#   generation (e.g. NDWIice, NDWI, NDSI) before manual
+#   generation (mainly for NDWIice, NDWI) before manual
 #   annotation or random forest classification.
 # Inputs:  PlanetScope multispectral GeoTIFF
 # Outputs: Single-band GeoTIFF mask (value = class_id where
@@ -28,14 +27,13 @@ output_raster_path = r"C:\path\to\your\output_mask.tif"   # where to save the ma
 # NDI band selection (1-based band numbers in your raster)
 # e.g. NDWIice: band_a = Green (4), band_b = Red (6)
 #      NDWI:    band_a = Green (4), band_b = NIR  (8)
-#      NDSI:    band_a = Green (4), band_b = SWIR (use appropriate band)
 band_a_number = 4   # numerator band   (e.g. Green)
 band_b_number = 6   # denominator band (e.g. Red)
 band_a_label  = "band_a"
 band_b_label  = "band_b"
 
 threshold = 0.10    # pixels with NDI > threshold are assigned class_id
-class_id  = 3       # class label to burn into the output mask
+class_id  = 3       # class label that the output mask will have that can facilitate later machine learning training data annotation
 
 # ==========================================================
 # LOAD RASTER
