@@ -1,8 +1,7 @@
 # ============================================================
-# 2D Spectral Histogram Analysis — QGIS Python Console Script
-# Dissertation: [Your Dissertation Title Here]
-# Author: [Your Name]
-# Date: [Month Year]
+# 2D Spectral Histogram Analysis
+# Author: Zhihan Xu
+# Date: May 2026
 # ============================================================
 #
 # Description:
@@ -16,7 +15,7 @@
 #   names, and colours are defined centrally to stay consistent
 #   with the 1D histogram script. Sampling is capped to balance
 #   class sizes and avoid overrepresentation of larger classes.
-#   Must be run inside the QGIS Python Console.
+#   Run inside the QGIS Python Console.
 #
 # Inputs:
 #   - A PlanetScope multispectral raster layer loaded in QGIS
