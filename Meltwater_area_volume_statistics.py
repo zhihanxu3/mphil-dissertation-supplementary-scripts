@@ -128,8 +128,8 @@ DEPTH_B     = -0.8952
 #   R_MIN : reflectance below this is masked (Because R has a negative power, 
 #           depth grows toward infinity as R approaches zero, thus there 
 #           should be a threshold limiting the minimum possible value of depth)
-#           When R = 0.003, derived depth is 50.12 m
-R_MIN = 0.003
+#           When R = 0.005, derived depth is 31.73 m
+R_MIN = 0.005
 
 # RF / DL class definitions
 RF_WATER_CLASSES = {
