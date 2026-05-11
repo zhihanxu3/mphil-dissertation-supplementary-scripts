@@ -124,7 +124,7 @@ PIXEL_AREA  = PIXEL_SIZE ** 2          # 9 m^2 per pixel
 DEPTH_A     = 0.2764
 DEPTH_B     = -0.8952
 
-# Physically reasonable bounds for the depth retrieval.
+# Physically reasonable bound for the depth retrieval.
 #   R_MIN : reflectance below this is masked (Because R has a negative power, 
 #           depth grows toward infinity as R approaches zero, thus there 
 #           should be a threshold limiting the minimum possible value of depth)
