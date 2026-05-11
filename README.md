@@ -106,3 +106,16 @@ and `predict_input/` to contain the 4-band split prediction tiles.
 
 All other SLURM directives, module loads, environment variables,
 and nnU-Net commands need no change.
+
+## Statistical Analysis of Mapping Results
+Statistical Analysis of Mapping Results
+`Meltwater_area_volume_statistics.py` takes the Random Forest and 
+nnU-Net prediction rasters and computes the total area and volume 
+of supraglacial meltwater stored in lakes, channels, and slush. 
+Statistics are produced at three levels, for individual tiles, AOIs, 
+and drainage basin regions. Statistics for the latter two are reported 
+as averaged meltwater area density and volume density (equivalent to 
+water depth equivalent). For channel features, drainage density is 
+additionally computed at all three levels. Meltwater depth is estimated 
+using the empirical equation of Williamson et al. (2018) and Zhang et al. 
+(2023), which derives depth from only the red-band reflectance of water pixels.
