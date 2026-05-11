@@ -108,7 +108,6 @@ All other SLURM directives, module loads, environment variables,
 and nnU-Net commands need no change.
 
 ## Statistical Analysis of Mapping Results
-Statistical Analysis of Mapping Results
 `Meltwater_area_volume_statistics.py` takes the Random Forest and 
 nnU-Net prediction rasters and computes the total area and volume 
 of supraglacial meltwater stored in lakes, channels, and slush. 
