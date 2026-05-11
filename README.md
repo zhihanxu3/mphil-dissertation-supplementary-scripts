@@ -119,7 +119,8 @@ additionally computed at all three levels. Meltwater depth is estimated
 using the empirical equation of Williamson et al. (2018) and Zhang et al. 
 (2023), which derives depth from only the red-band reflectance of water pixels.
 
-Declaration: All scripts presented in this repository were refined and modified 
+## Declaration: 
+All scripts presented in this repository were refined and modified 
 with assistance from Generative AI tools, including OpenAI ChatGPT 5.5 and 
 Anthropic Claude Opus 4.7. However, the core ideas, workflow design, script 
 structure, algorithms, analytical objectives, and interpretation of outputs 
